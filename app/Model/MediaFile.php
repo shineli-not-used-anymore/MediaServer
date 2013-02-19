@@ -4,7 +4,8 @@ App::uses('File', 'Utility');
 
 Class MediaFile extends AppModel {
 
-    const BASE_FOLDER_PATH = '/Users/xiaoyangli/Downloads';
+    const BASE_FOLDER_PATH = '/Volumes/pool_sparse_bundle/Downloads/片子/TV/NEW\ Season/';
+    const BASE_FOLDER_PATH_DEV = '/Users/xiaoyangli/Downloads';
 
     /**
      * do not use table
@@ -25,7 +26,11 @@ Class MediaFile extends AppModel {
     private function getBaseFolder()
     {
         if (!$this->BaseFolder) {
-            $this->BaseFolder = new Folder(self::BASE_FOLDER_PATH);
+            if (APPLICATION_ENV == 'development') {
+                $this->BaseFolder = new Folder(self::BASE_FOLDER_PATH_DEV);
+            } else {
+                $this->BaseFolder = new Folder(self::BASE_FOLDER_PATH);
+            }
         }
         return $this->BaseFolder;
     }
