@@ -43,7 +43,7 @@ Class MediaFile extends AppModel {
      * get the path of playing file
      */
     public function playingFile() {
-        $PlayingMediaFile = new File(dirname(__DIR__) . DS . 'tmp' . DS . 'playing_media_file');
+        $PlayingMediaFile = new File(dirname(__DIR__) . DS . 'webroot' . DS . 'files' . DS . 'playing_media_file');
         return $PlayingMediaFile->read();
     }
 
@@ -52,8 +52,8 @@ Class MediaFile extends AppModel {
      * @param string $file
      */
     public function open($file) {
-        $PlayingMediaFile = new File(dirname(__DIR__) . DS . 'tmp' . DS . 'playing_media_file');
-        $PausedMediaFile = new File(dirname(__DIR__) . DS . 'tmp' . DS . 'paused_media_file');
+        $PlayingMediaFile = new File(dirname(__DIR__) . DS . 'webroot' . DS . 'files' . DS . 'playing_media_file');
+        $PausedMediaFile = new File(dirname(__DIR__) . DS . 'webroot' . DS . 'files' . DS . 'paused_media_file');
 
         if ($PlayingMediaFile->read() == $file) {
             $command = "osascript -e 'tell application \"MPlayerX\" to pause'";
