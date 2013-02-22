@@ -18,6 +18,14 @@ Class MediaFile extends AppModel {
      */
     private $BaseFolder;
 
+    private function getBasePath()
+    {
+        if (APPLICATION_ENV == 'development') {
+            return self::BASE_FOLDER_PATH_DEV;
+        }
+        return self::BASE_FOLDER_PATH;
+    }
+
     /**
      * getter for $this->baseFolder
      *
@@ -26,22 +34,28 @@ Class MediaFile extends AppModel {
     private function getBaseFolder()
     {
         if (!$this->BaseFolder) {
-            if (APPLICATION_ENV == 'development') {
-                $this->BaseFolder = new Folder(self::BASE_FOLDER_PATH_DEV);
-            } else {
-                $this->BaseFolder = new Folder(self::BASE_FOLDER_PATH);
-            }
+            $this->BaseFolder = new Folder($this->getBasePath());
         }
         return $this->BaseFolder;
     }
 
     /**
      * list all files
-     * @param unknown $path
+     * @param string $path
      */
-    public function listAll() {
+    public function listAll($path = null) {
         $baseFolder = $this->getBaseFolder();
-        return $baseFolder->findRecursive('.*\.(mp3|mpg|mp4|mkv|rmvb)', true);
+
+        if ($path) {
+            $baseFolder->path = $path;
+        }
+        $filesAndFolders = $baseFolder->read(true, true, true);
+        $folders = $filesAndFolders[0];
+        $files = $filesAndFolders[1];
+        $files = Hash::filter($files, function ($file) {
+            return (preg_match('/.*\.(mp3|mpg|mp4|mkv|rmvb)/', $file));
+        });
+        return compact('files', 'folders');
     }
 
     /**

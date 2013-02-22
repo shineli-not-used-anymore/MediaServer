@@ -11,7 +11,7 @@ Class MediaFilesController extends AppController {
      * list all the media files
      */
     public function index() {
-        $list = $this->MediaFile->listAll('/Users/xiaoyangli');
+        $list = $this->MediaFile->listAll($this->request->data('MediaFile.path'));
         $playingFile = $this->MediaFile->playingFile();
         $this->set(compact('list', 'pausedFile', 'playingFile'));
     }
@@ -24,6 +24,6 @@ Class MediaFilesController extends AppController {
         $this->layout = '';
         $mediaFilePath = $this->request->data('MediaFile.path');
         $this->MediaFile->open($mediaFilePath);
-        $this->redirect(array('action' => 'index'));
+        $this->redirect($this->referer());
     }
 }

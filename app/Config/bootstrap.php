@@ -110,5 +110,9 @@ CakeLog::config('error', array(
 ));
 
 if (!defined('APPLICATION_ENV')) {
-    define('APPLICATION_ENV', 'production');
+    if (getenv('APPLICATION_ENV')) {
+        define('APPLICATION_ENV', getenv('APPLICATION_ENV'));
+    } else {
+        define('APPLICATION_ENV', 'production');
+    }
 }
