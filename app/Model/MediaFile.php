@@ -59,40 +59,23 @@ Class MediaFile extends AppModel {
     }
 
     /**
-     * get the path of playing file
-     */
-    public function playingFile() {
-        $PlayingMediaFile = new File(dirname(__DIR__) . DS . 'webroot' . DS . 'files' . DS . 'playing_media_file');
-        return $PlayingMediaFile->read();
-    }
-
-    /**
      * open file
      * @param string $file
      */
     public function open($file) {
-        $PlayingMediaFile = new File(dirname(__DIR__) . DS . 'webroot' . DS . 'files' . DS . 'playing_media_file');
-        $PausedMediaFile = new File(dirname(__DIR__) . DS . 'webroot' . DS . 'files' . DS . 'paused_media_file');
+        // close MPlayerX
+        $command = "osascript -e 'tell application \"MPlayerX\" to quit'";
+        exec($command);
+        sleep(1);
+        // open MPlayerX with new file
+        $command = 'open -a /Applications/MPlayerX.app --args -file ' . escapeshellarg($file) . ' -StartByFullScreen YES';
+        exec($command);
+    }
 
-        if ($PlayingMediaFile->read() == $file) {
-            $command = "osascript -e 'tell application \"MPlayerX\" to pause'";
-            exec($command);
-            $PlayingMediaFile->write('');
-            $PausedMediaFile->write($file);
-        } else if ($PausedMediaFile->read() == $file) {
-            $command = "osascript -e 'tell application \"MPlayerX\" to play'";
-            exec($command);
-            $PausedMediaFile->write('');
-            $PlayingMediaFile->write($file);
-        } else {
-            // close MPlayerX
-            $command = "osascript -e 'tell application \"MPlayerX\" to quit'";
-            exec($command);
-            sleep(1);
-            // open MPlayerX with new file
-            $command = 'open -a /Applications/MPlayerX.app --args -file ' . escapeshellarg($file) . ' -StartByFullScreen YES';
-            exec($command);
-            $PlayingMediaFile->write($file);
-        }
+    public function playOrPause()
+    {
+        sleep(0.5);
+        $command = "osascript -e 'tell application \"MPlayerX\" to playpause'";
+        exec($command);
     }
 }

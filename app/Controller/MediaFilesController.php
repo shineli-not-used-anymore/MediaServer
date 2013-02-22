@@ -12,8 +12,7 @@ Class MediaFilesController extends AppController {
      */
     public function index() {
         $list = $this->MediaFile->listAll($this->request->data('MediaFile.path'));
-        $playingFile = $this->MediaFile->playingFile();
-        $this->set(compact('list', 'pausedFile', 'playingFile'));
+        $this->set(compact('list', 'pausedFile'));
     }
 
     /**
@@ -24,6 +23,12 @@ Class MediaFilesController extends AppController {
         $this->layout = '';
         $mediaFilePath = $this->request->data('MediaFile.path');
         $this->MediaFile->open($mediaFilePath);
-        $this->redirect($this->referer());
+        $this->redirect(array('action' => 'index'));
+    }
+
+    public function play_or_pause()
+    {
+        $this->MediaFile->playOrPause();
+        $this->redirect(array('action' => 'index'));
     }
 }

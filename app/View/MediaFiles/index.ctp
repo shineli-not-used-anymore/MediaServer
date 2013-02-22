@@ -20,8 +20,7 @@
     <?php foreach ($list['files'] as $mediaFilePath): ?>
         <?php
             echo $this->element('media_file', array(
-                'mediaFilePath' => $mediaFilePath,
-                'playingFile' => $playingFile
+                'mediaFilePath' => $mediaFilePath
             ));
         ?>
     <?php endforeach; ?>

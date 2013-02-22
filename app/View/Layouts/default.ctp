@@ -28,9 +28,17 @@
     <?php
         echo $this->Html->css('bootstrap.min');
         echo $this->Html->css('bootstrap-responsive.min');
+        echo $this->Html->css('styles');
     ?>
 </head>
 <body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><?php echo $this->Html->link(__('Play/Pause'), array('controller' => 'media_files', 'action' => 'play_or_pause')); ?></li>
+            </ul>
+        </div>
+    </div>
     <div id="main">
         <div class="container">
             <?php echo $this->Session->flash(); ?>
