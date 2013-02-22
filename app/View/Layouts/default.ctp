@@ -32,7 +32,7 @@
     ?>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
                 <li><?php echo $this->Html->link(__('Play/Pause'), array('controller' => 'media_files', 'action' => 'play_or_pause')); ?></li>
