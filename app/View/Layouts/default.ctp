@@ -36,7 +36,7 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <ul class="nav">
-                    <li><?php echo $this->Html->link(__('Play/Pause'), array('controller' => 'media_files', 'action' => 'play_or_pause')); ?></li>
+                    <li class="play-or-pause"><?php echo $this->Html->link(__('Play/Pause'), array('controller' => 'media_files', 'action' => 'play_or_pause')); ?></li>
                 </ul>
             </div>
         </div>

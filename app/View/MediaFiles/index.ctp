@@ -5,15 +5,7 @@
                 <?php echo substr($folderPath, strrpos($folderPath, '/') + 1); ?>
             </td>
             <td>
-                <?php
-                    echo $this->Form->create('MediaFile', array('action' => 'index', 'class' => 'form-inline'));
-                    echo $this->Form->hidden('path', array('value' => $folderPath));
-                    echo $this->Form->end(array(
-                        'label' => __('open'),
-                        'class' => 'btn',
-                        'div' => false
-                    ));
-                ?>
+                <a href="/media_files/index/?folderPath=<?php echo $folderPath;?>" class="btn"><?php echo __('open');?></a>
             </td>
         </tr>
     <?php endforeach; ?>
