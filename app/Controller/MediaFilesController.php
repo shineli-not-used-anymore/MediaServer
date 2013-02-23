@@ -28,6 +28,6 @@ Class MediaFilesController extends AppController {
     public function play_or_pause()
     {
         $this->MediaFile->playOrPause();
-        $this->redirect(array('action' => 'index'));
+        $this->redirect($this->request->referer());
     }
 }
