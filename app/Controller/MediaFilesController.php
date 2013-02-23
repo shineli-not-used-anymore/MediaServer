@@ -22,12 +22,12 @@ Class MediaFilesController extends AppController {
     {
         $this->layout = '';
         $this->MediaFile->open($this->request->query('mediaFilePath'));
-        $this->redirect(array('action' => 'index'));
+        $this->autoRender = false;
     }
 
     public function play_or_pause()
     {
         $this->MediaFile->playOrPause();
-        $this->redirect($this->request->referer());
+        $this->autoRender = false;
     }
 }

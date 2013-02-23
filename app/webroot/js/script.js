@@ -1,5 +1,13 @@
 $(function(){
-    $('.nav').on('click', '.play-or-pause a', function(e) {
+    $('.nav').on('click', '.play-or-pause', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        $.ajax({
+            url: $this.attr('href'),
+            cache: false
+        });
+    });
+    $('.media-files').on('click', '.play', function (e) {
         e.preventDefault();
         var $this = $(this);
         $.ajax({
