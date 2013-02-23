@@ -53,7 +53,7 @@ Class MediaFile extends AppModel {
         $folders = $filesAndFolders[0];
         $files = $filesAndFolders[1];
         $files = Hash::filter($files, function ($file) {
-            return (preg_match('/.*\.(mp3|mpg|mp4|mkv|rmvb|avi)/', $file));
+            return (preg_match('/.*\.(mp3|mpg|mpeg|mkv|rmvb|avi)/', $file));
         });
         return compact('files', 'folders');
     }
