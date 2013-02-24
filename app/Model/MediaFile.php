@@ -5,7 +5,7 @@ App::uses('File', 'Utility');
 Class MediaFile extends AppModel {
 
     const BASE_FOLDER_PATH = '/Volumes/pool_sparse_bundle/Downloads';
-    const BASE_FOLDER_PATH_DEV = '/Users/xiaoyangli/Downloads';
+    const BASE_FOLDER_PATH_DEV = '/Users/lixiaoyang/Downloads';
 
     /**
      * do not use table
