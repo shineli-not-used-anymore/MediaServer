@@ -7,7 +7,7 @@ $(function(){
             cache: false
         });
     });
-    $('.media-files').on('click', '.play', function (e) {
+    $('.nav').on('click', '.shut-down a', function(e) {
         e.preventDefault();
         var $this = $(this);
         $.ajax({
@@ -15,4 +15,12 @@ $(function(){
             cache: false
         });
     });
+    $('.media-files').on('click', '.play', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        $.ajax({
+            url: $this.attr('href'),
+            cache: false
+        });
+    });    
 });
