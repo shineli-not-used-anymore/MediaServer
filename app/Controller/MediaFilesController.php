@@ -25,9 +25,9 @@ Class MediaFilesController extends AppController {
         $this->autoRender = false;
     }
 
-    public function play_or_pause()
+    public function quit()
     {
-        $this->MediaFile->playOrPause();
+        $this->MediaFile->quit();
         $this->autoRender = false;
     }
 }

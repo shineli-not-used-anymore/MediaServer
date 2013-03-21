@@ -1,5 +1,5 @@
 $(function(){
-    $('.nav').on('click', '.play-or-pause a', function(e) {
+    $('.nav').on('click', '.quit a', function(e) {
         e.preventDefault();
         var $this = $(this);
         $.ajax({

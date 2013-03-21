@@ -72,10 +72,10 @@ Class MediaFile extends AppModel {
         exec($command);
     }
 
-    public function playOrPause()
+    public function stop()
     {
         sleep(0.5);
-        $command = "osascript -e 'tell application \"MPlayerX\" to playpause'";
+        $command = "osascript -e 'tell application \"MPlayerX\" to quit'";
         exec($command);
     }
 }
