@@ -10,6 +10,6 @@ Class System extends AppModel {
 */
 	public function shutDown()
 	{
-		exec('shutdown -h now');
+		exec('osascript -e \'tell application "System Events" to shut down\'');
 	}
 }
