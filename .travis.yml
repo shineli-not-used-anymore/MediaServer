@@ -1,14 +1,10 @@
 language: php
 
 php:
-  - 5.2
   - 5.3
-  - 5.4
 
 env:
   - DB=mysql
-  - DB=pgsql
-  - DB=sqlite
 
 matrix:
   include:
@@ -18,11 +14,6 @@ matrix:
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi"
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test2;'; fi"
-  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test3;'; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE cakephp_test;' -U postgres; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE SCHEMA test2;' -U postgres -d cakephp_test; fi"
-  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE SCHEMA test3;' -U postgres -d cakephp_test; fi"
   - chmod -R 777 ./app/tmp
   - echo "var net = require('net');
     var server = net.createServer();
@@ -114,7 +105,7 @@ before_script:
     }" > app/Config/database.php
 
 script:
-  - sh -c "if [ '$PHPCS' != '1' ]; then ./lib/Cake/Console/cake test core AllTests --stderr; else phpcs -p --extensions=php --standard=CakePHP ./lib/Cake; fi"
+  - sh -c "if [ '$PHPCS' != '1' ]; then ./lib/Cake/Console/cake test app Model/MediaFile --stderr; else phpcs -p --extensions=php --standard=CakePHP ./lib/Cake; fi"
 
 notifications:
   email: false
