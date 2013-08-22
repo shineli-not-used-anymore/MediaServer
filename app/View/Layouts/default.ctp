@@ -50,6 +50,10 @@
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
-    <?php echo $this->Html->script('script'); ?>
+    <?php echo $this->Html->script('vendor/require'); ?>
+    <?php echo $this->Html->script('vendor/underscore-min'); ?>
+    <?php echo $this->Html->script('vendor/backbone'); ?>
+    <?php echo $this->Html->script('vendor/handlebars'); ?>
+    <?php echo $this->fetch('script'); ?>
 </body>
 </html>
