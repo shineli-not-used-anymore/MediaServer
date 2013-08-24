@@ -4,7 +4,7 @@ App::uses('File', 'Utility');
 
 Class MediaFile extends AppModel {
 
-    const BASE_FOLDER_PATH = '/Volumes/pool_sparse_bundle/Downloads';
+    const BASE_FOLDER_PATH = '/Volumes/pool/media';
     const BASE_FOLDER_PATH_DEV = '/Users/shineli/Downloads';
 
     /**
@@ -20,10 +20,10 @@ Class MediaFile extends AppModel {
 
     private function getBasePath()
     {
-//        if (APPLICATION_ENV == 'development') {
+        if (APPLICATION_ENV == 'development') {
             return self::BASE_FOLDER_PATH_DEV;
-//        }
-//        return self::BASE_FOLDER_PATH;
+        }
+        return self::BASE_FOLDER_PATH;
     }
 
     /**
@@ -53,8 +53,7 @@ Class MediaFile extends AppModel {
         $folders = $filesAndFolders[0];
         $files = $filesAndFolders[1];
         $files = Hash::filter($files, function ($file) {
-//            return (preg_match('/.*\.(mp4|mp3|mpg|mpeg|mkv|rmvb|avi)/', $file));
-            return $file;
+            return (preg_match('/.*\.(mp4|mp3|mpg|mpeg|mkv|rmvb|avi)/', $file));
         });
         return compact('files', 'folders');
     }
