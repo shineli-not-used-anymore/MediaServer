@@ -10,12 +10,9 @@ Class MediaFilesController extends AppController {
     /**
      * list all the media files
      */
-    public function index() {
-
-        if ($this->request->is('ajax')) {
-            $list = $this->MediaFile->listAll($this->request->query('folderPath'));
-            $this->set(compact('list', 'pausedFile'));
-        }
+    public function index($path = null) {
+        $list = $this->MediaFile->listAll($path);
+        $this->set(compact('list', 'pausedFile'));
     }
 
     /**

@@ -41,7 +41,7 @@
 /**
  * RESTFUL
  */
-    Router::mapResources('media_files');
+//    Router::mapResources('media_files');
 
 /**
  * Parse Extension

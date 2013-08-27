@@ -20,9 +20,9 @@ Class MediaFile extends AppModel {
 
     private function getBasePath()
     {
-        if (APPLICATION_ENV == 'development') {
+//        if (APPLICATION_ENV == 'development') {
             return self::BASE_FOLDER_PATH_DEV;
-        }
+//        }
         return self::BASE_FOLDER_PATH;
     }
 
@@ -44,18 +44,45 @@ Class MediaFile extends AppModel {
      * @param string $path
      */
     public function listAll($path = null) {
+        $path = str_replace('<', DS, $path);
+        $hash = Security::hash($path);
+        $results = Cache::read($hash);
+
+        if ($results) {
+//            return $results;
+        }
+
         $baseFolder = $this->getBaseFolder();
 
         if ($path) {
             $baseFolder->path = $path;
         }
         $filesAndFolders = $baseFolder->read(true, true, true);
-        $folders = $filesAndFolders[0];
-        $files = $filesAndFolders[1];
-        $files = Hash::filter($files, function ($file) {
+        $folders = array();
+
+        foreach ($filesAndFolders[0] as $index => $folder) {
+
+            $folders[$index] = array(
+                'name' => substr($folder, strrpos($folder, '/') + 1),
+                'path' => str_replace(DS, '<', $folder), 0, stripos($folder, '/')
+            );
+        }
+
+        $files = array();
+        $filesAndFolders[1] = Hash::filter($filesAndFolders[1], function ($file) {
             return (preg_match('/.*\.(mp4|mp3|mpg|mpeg|mkv|rmvb|avi)/', $file));
         });
-        return compact('files', 'folders');
+
+        foreach ($filesAndFolders[1] as $index => $file) {
+            $files[$index] = array(
+                'name' => substr($file, strrpos($file, DS) + 1),
+                'path' => $file
+            );
+        }
+
+        $results = compact('files', 'folders');
+        Cache::write($hash, $results);
+        return $results;
     }
 
     /**

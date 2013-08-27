@@ -1,28 +1,27 @@
-$(function(){
-    $('.nav').on('click', '.quit a', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        $.ajax({
-            url: $this.attr('href'),
-            cache: false
-        });
-    });
-    $('.nav').on('click', '.shut-down a', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        if (confirm('Shut down?')) {
-            $.ajax({
-                url: $this.attr('href'),
-                cache: false
-            });
+require.config({
+    paths: {
+        jquery: 'vendor/jquery-1.9.0.min',
+        underscore: 'vendor/underscore-min',
+        backbone: 'vendor/backbone',
+        handlebars: 'vendor/handlebars',
+        text: 'vendor/text'
+    },
+    shim: {
+        underscore: {
+            exports: '_'
+        },
+        backbone: {
+            deps: ["underscore", "jquery"],
+            exports: "Backbone"
+        },
+        handlebars: {
+            exports: 'Handlebars'
         }
-    });
-    $('.media-files').on('click', '.play', function (e) {
-        e.preventDefault();
-        var $this = $(this);
-        $.ajax({
-            url: $this.attr('href'),
-            cache: false
-        });
-    });    
+    }
+});
+
+require([
+    'routers/' + window.controller
+], function(Module){
+    Module.initialize();
 });
