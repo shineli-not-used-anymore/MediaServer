@@ -46,11 +46,11 @@ Class MediaFile extends AppModel {
     public function listAll($path = null) {
         $path = str_replace('<', DS, $path);
         $hash = Security::hash($path);
-        $results = Cache::read($hash);
+//        $results = Cache::read($hash);
 
-        if ($results) {
+//        if ($results) {
 //            return $results;
-        }
+//        }
 
         $baseFolder = $this->getBaseFolder();
 
@@ -61,10 +61,10 @@ Class MediaFile extends AppModel {
         $folders = array();
 
         foreach ($filesAndFolders[0] as $index => $folder) {
-
-            $folders[$index] = array(
+            $folders[] = array(
                 'name' => substr($folder, strrpos($folder, '/') + 1),
-                'path' => str_replace(DS, '<', $folder), 0, stripos($folder, '/')
+                'path' => str_replace(DS, '<', $folder),
+                'type' => 'folder'
             );
         }
 
@@ -74,13 +74,14 @@ Class MediaFile extends AppModel {
         });
 
         foreach ($filesAndFolders[1] as $index => $file) {
-            $files[$index] = array(
+            $files[] = array(
                 'name' => substr($file, strrpos($file, DS) + 1),
-                'path' => $file
+                'path' => $file,
+                'type' => 'file'
             );
         }
 
-        $results = compact('files', 'folders');
+        $results = array_merge($folders, $files);
         Cache::write($hash, $results);
         return $results;
     }

@@ -7,6 +7,11 @@ App::uses('AppController', 'Controller');
  */
 Class MediaFilesController extends AppController {
 
+    public function beforeFilter()
+    {
+        $this->set('rootUrl', '/media_files/index');
+    }
+
     /**
      * list all the media files
      */

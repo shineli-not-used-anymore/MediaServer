@@ -1,35 +1,27 @@
 define([
     'jquery',
-    'underscore',
-    'backbone',
+    'marionette',
     'handlebars',
     'collections/media_files',
-    'text!/templates/view/file',
-    'text!/templates/view/folder',
-    'text!/templates/view/media_file_list'
-], function($, _, Backbone, Handlebars, MediaFiles, file, folder, mediaFileList){
+    'text!/templates/view/media_file_table',
+    'controllers/media_file_item'
+], function($, Marionette, Handlebars, MediaFiles, mediaFileTable, MediaFileItem){
 
-    Handlebars.registerPartial("file", file);
-    Handlebars.registerPartial("folder", folder);
-
-    MediaFileListView = Backbone.View.extend({
-        el: '#main .container',
-        template: Handlebars.compile(mediaFileList),
-        render: function(){
-        this.$el.html(this.template(this.collection.toJSON()[0]));
-        },
+    var MediaFileListView = Marionette.CompositeView.extend({
+        itemView: MediaFileItem,
+        template: Handlebars.compile(mediaFileTable),
+        itemViewContainer: 'tbody',
         initialize: function(){
             this.collection = new MediaFiles(window.initialData);
-            this.collection.on('reset', function(col, opts){
-                this.render();
-            }, this);
-            this.render();
         },
         events: {
             "click .play" : 'play'
         },
         openPath: function (path) {
-            this.collection.model.open.apply(this.collection, [path, this.collection.reset]);
+            this.collection.fetch({
+                url: this.collection.url + '/' + (path ? path : ''),
+                reset: true
+            });
         },
         play: function (e) {
             e.preventDefault();

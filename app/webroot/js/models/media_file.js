@@ -14,7 +14,7 @@ define([
             $.ajax({
                 url: link,
                 success: function (data) {
-                    opened.apply(that, [data]);
+                    opened.apply(that, data);
                 },
                 dataType: 'json'
             });

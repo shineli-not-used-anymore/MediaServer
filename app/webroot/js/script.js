@@ -4,7 +4,8 @@ require.config({
         underscore: 'vendor/underscore-min',
         backbone: 'vendor/backbone',
         handlebars: 'vendor/handlebars',
-        text: 'vendor/text'
+        text: 'vendor/text',
+        marionette: 'vendor/backbone.marionette'
     },
     shim: {
         underscore: {
@@ -16,12 +17,16 @@ require.config({
         },
         handlebars: {
             exports: 'Handlebars'
+        },
+        marionette : {
+            deps : ['jquery', 'underscore', 'backbone'],
+            exports : 'Marionette'
         }
     }
 });
 
 require([
-    'routers/' + window.controller
-], function(Module){
-    Module.initialize();
+    'app'
+], function(App){
+    App.initialize();
 });

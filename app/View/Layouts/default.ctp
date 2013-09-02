@@ -51,6 +51,7 @@
 
     <script>
         window.controller = '<?php echo $this->request->controller; ?>';
+        window.root_url = '<?php echo $rootUrl ?>';
     </script>
 
     <?php
