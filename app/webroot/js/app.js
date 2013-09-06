@@ -1,13 +1,4 @@
-define([
-    'backbone',
-    'marionette',
-    'handlebars',
-    'routers/' + window.controller
-], function(Backbone, Marionette, Handlebars, AppRouter){
-//    Marionette.Renderer.render = function(template, data){
-//        return Handlebars.compile(template)(data);
-//    };
-
+var startApp = function($, Backbone, Marionette, Handlebars, AppRouter){
     var app = new Marionette.Application();
 
     var initialize = function() {
@@ -44,4 +35,14 @@ define([
     return {
         initialize: initialize
     }
-});
+};
+
+if (window.controller == 'media_files') {
+    define([
+        'jquery',
+        'backbone',
+        'marionette',
+        'handlebars',
+        'routers/media_files'
+    ], startApp);
+}

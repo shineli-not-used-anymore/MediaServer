@@ -1,8 +1,8 @@
 define([
     'marionette',
     'handlebars',
-    'text!/templates/view/file',
-    'text!/templates/view/folder'
+    'text!templates/file.html',
+    'text!templates/folder.html'
 ], function(Mationette, HandleBars, file, folder){
 
     var MediaFileItemsController = Backbone.Marionette.ItemView.extend({

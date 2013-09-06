@@ -3,7 +3,7 @@ define([
     'marionette',
     'handlebars',
     'collections/media_files',
-    'text!/templates/view/media_file_table',
+    'text!templates/media_file_table.html',
     'controllers/media_file_item'
 ], function($, Marionette, Handlebars, MediaFiles, mediaFileTable, MediaFileItem){
 
