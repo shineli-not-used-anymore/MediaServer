@@ -56,7 +56,7 @@
 
     <?php
         echo $this->Html->script('vendor/require', array(
-            'data-main' => '/js/dist/script'
+            'data-main' => '/js/script'
         ));
     ?>
     <?php //echo $this->fetch('script'); ?>
